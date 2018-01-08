@@ -1,12 +1,11 @@
 pipeline {
   agent {
     kubernetes {
-      label 'mypod'
+      label 'test-pod'
       containerTemplate {
         name 'php'
         image 'php'
         ttyEnabled true
-        command 'cat'
       }
     }
   }
@@ -14,7 +13,7 @@ pipeline {
     stage('Run php version') {
       steps {
         container('php') {
-          sh 'mvn -version'
+          sh 'php -v'
         }
       }
     }
