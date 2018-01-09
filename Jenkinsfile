@@ -24,6 +24,8 @@ podTemplate(label: 'pod-php',
         stage('Build Docker image') {
             container('jnlp') {
                 sh "ls -la"
+ 				checkout scm
+                sh "ls -la"
                 sh "docker build -t test ."
             }
         }
