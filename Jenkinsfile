@@ -27,6 +27,7 @@ podTemplate(label: 'pod-php',
  				checkout scm
                 sh "ls -la"
                 sh "docker build -t test ."
+                sh "kubectl get pods"
             }
         }
     }
