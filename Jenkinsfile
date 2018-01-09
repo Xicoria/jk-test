@@ -21,10 +21,10 @@ podTemplate(label: 'pod-php',
                 sh ("php -v")
             }
         }	
-    }
-    stage('Build Docker image') {
-        container('jnlp') {
-            sh "docker build -t test ."
+        stage('Build Docker image') {
+            container('jnlp') {
+                sh "docker build -t test ."
+            }
         }
     }
 }
