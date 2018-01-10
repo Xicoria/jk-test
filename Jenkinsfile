@@ -12,7 +12,7 @@ podTemplate(label: 'microservices',
             ttyEnabled: true,
             command: 'cat',
             envVars: [
-				envVar(key: 'REDIS_HOST', value: 'redis')
+				envVar(key: 'REDIS_HOST', value: 'redis'),
 				envVar(key: 'REDIS_PORT', value: '6379')
 			]
         ),
