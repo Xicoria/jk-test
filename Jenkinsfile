@@ -64,6 +64,7 @@ podTemplate(label: 'microservices',
         stage('Updating dependencies') {
 			container('php') {
 				checkout scm
+                sh ls
 				sh "composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest"
     			sh "composer clear-cache"
     			sh "composer dump-autoload --classmap-authoritative"
