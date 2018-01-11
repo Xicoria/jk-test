@@ -12,6 +12,7 @@ podTemplate(label: 'microservices',
             ttyEnabled: true,
             command: 'cat',
             envVars: [
+				envVar(key: 'COMPOSER_ALLOW_SUPERUSER', value: 'true'),
 				envVar(key: 'REDIS_HOST', value: 'redis'),
 				envVar(key: 'REDIS_PORT', value: '6379')
 			]
@@ -44,6 +45,7 @@ podTemplate(label: 'microservices',
 				sh "echo 'date.timezone = UTC' > /usr/local/etc/php/conf.d/production.ini"
 				sh "echo 'xdebug.remote_enable           = 0' > /usr/local/etc/php/conf.d/production.ini"
 				sh "echo 'xdebug.remote_connect_back     = off' > /usr/local/etc/php/conf.d/production.ini"
+				sh "cat /usr/local/etc/php/conf.d/production.ini"
 			}
 		}
         stage('Setting up php modules') {
@@ -52,6 +54,7 @@ podTemplate(label: 'microservices',
 				sh "yes | pecl install redis"
 				sh "echo 'extension=igbinary.so' > /usr/local/etc/php/conf.d/extra_php.ini"
 				sh "echo 'extension=redis.so' >> /usr/local/etc/php/conf.d/extra_php.ini"
+				sh "cat /usr/local/etc/php/conf.d/extra_php.ini"
 			}
 		}
         stage('Installing composer') {
@@ -64,15 +67,17 @@ podTemplate(label: 'microservices',
         stage('Updating dependencies') {
 			container('php') {
 				checkout scm
+				sh "cd app"
                 sh "ls"
 				sh "composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest"
     			sh "composer clear-cache"
     			sh "composer dump-autoload --classmap-authoritative"
 			}
 		}
-        stage('Verify PHP version from inside pod') {
+        stage('Running tests') {
             container('php') {
-                sh ("php -v")
+				sh "cd app"
+				sh "./vendor/bin/phpunit"
             }
         }	
         stage('Build Docker image') {
