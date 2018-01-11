@@ -4,7 +4,7 @@ podTemplate(label: 'microservices',
     containers: [
         containerTemplate(
             name: 'jnlp',
-            image: 'xicoria/jkslave:v1.0'
+            image: 'xicoria/jkslave:latest
         ),
         containerTemplate(
             name: 'php',
