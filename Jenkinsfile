@@ -84,8 +84,8 @@ podTemplate(label: 'microservices',
         }	
         stage('Build Docker image') {
             container('jnlp') {
- 				checkout scm
 				sh "echo ${BUILD_TAG}"
+				sh "echo ${GIT_REVISION,length=6}"
                 sh "env"
                 sh "docker build -t test ."
 				sh "ls"
