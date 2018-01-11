@@ -77,8 +77,9 @@ podTemplate(label: 'microservices',
 		}
         stage('Running tests') {
             container('php') {
-				sh "cd app"
-				sh "./vendor/bin/phpunit"
+				dir('src') {
+					sh "./vendor/bin/phpunit"
+				}
             }
         }	
         stage('Build Docker image') {
