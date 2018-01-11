@@ -29,6 +29,7 @@ podTemplate(label: 'microservices',
       node ('microservices') {
         stage('Setting up php.ini') {
 			container('php') {
+				sh "git"
 				sh "echo 'short_open_tag    = On' > /usr/local/etc/php/conf.d/production.ini"
 				sh "echo 'variables_order   = GPCS' >> /usr/local/etc/php/conf.d/production.ini"
 				sh "echo 'request_order     = GP' >> /usr/local/etc/php/conf.d/production.ini"
