@@ -67,6 +67,7 @@ podTemplate(label: 'microservices',
         stage('Updating dependencies') {
 			container('php') {
 				checkout scm
+				sh "export GIT_REVISION=$(git rev-parse --short HEAD)"
                 dir('src') {
 					sh "ls"
 					sh "composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest"
@@ -84,7 +85,6 @@ podTemplate(label: 'microservices',
         }	
         stage('Build Docker image') {
             container('jnlp') {
-				checkout scm
                 sh "env"
                 sh "docker build -t test ."
 				sh "ls"
