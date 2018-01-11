@@ -67,7 +67,7 @@ podTemplate(label: 'microservices',
         stage('Updating dependencies') {
 			container('php') {
 				checkout scm
-				sh "echo ${GIT_COMMIT}"
+				sh "echo $GIT_COMMIT"
 				sh "export GIT_REVISION=\$(git rev-parse --short HEAD)"
                 dir('src') {
 					sh "ls"
