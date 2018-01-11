@@ -30,21 +30,21 @@ podTemplate(label: 'microservices',
         stage('Setting up php.ini') {
 			container('php') {
 				sh "echo 'short_open_tag    = On' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'variables_order   = GPCS' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'request_order     = GP' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'allow_url_fopen   = On' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'allow_url_include = Off' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'memory_limit        = 512M' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'max_execution_time  = 900' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'max_input_time      = 300' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'post_max_size       = 50M' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'upload_max_filesize = 50M' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'max_input_vars      = 5000' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'always_populate_raw_post_data = -1' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'expose_php          = Off' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'date.timezone = UTC' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'xdebug.remote_enable           = 0' > /usr/local/etc/php/conf.d/production.ini"
-				sh "echo 'xdebug.remote_connect_back     = off' > /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'variables_order   = GPCS' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'request_order     = GP' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'allow_url_fopen   = On' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'allow_url_include = Off' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'memory_limit        = 512M' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'max_execution_time  = 900' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'max_input_time      = 300' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'post_max_size       = 50M' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'upload_max_filesize = 50M' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'max_input_vars      = 5000' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'always_populate_raw_post_data = -1' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'expose_php          = Off' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'date.timezone = UTC' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'xdebug.remote_enable           = 0' >> /usr/local/etc/php/conf.d/production.ini"
+				sh "echo 'xdebug.remote_connect_back     = off' >> /usr/local/etc/php/conf.d/production.ini"
 				sh "cat /usr/local/etc/php/conf.d/production.ini"
 			}
 		}
@@ -67,7 +67,7 @@ podTemplate(label: 'microservices',
         stage('Updating dependencies') {
 			container('php') {
 				checkout scm
-				sh "cd app"
+				sh "cd src"
                 sh "ls"
 				sh "composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest"
     			sh "composer clear-cache"
