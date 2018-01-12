@@ -88,7 +88,7 @@ podTemplate(label: 'microservices',
 				GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
 				sh "export GIT_REF=`git rev-parse --abbrev-ref HEAD`"
 				sh "env"
-                sh "docker build -t test:${git rev-parse --abbrev-ref HEAD} ."
+                sh "bash -c docker build -t test:${git rev-parse --abbrev-ref HEAD} ."
 				sh "ls"
             }
         }
