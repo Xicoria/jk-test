@@ -100,6 +100,9 @@ podTemplate(label: 'microservices',
                 println commit_idad
                 def commit_idd = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
                 println commit_idd
+				sh 'git rev-parse --abbrev-ref HEAD > GIT_BRANCH'
+				git_branch = readFile('GIT_BRANCH').trim()
+				println git_branch
 				if(commit_idad == 'master')
 				steps {
 					println "MASTER"
