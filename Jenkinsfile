@@ -88,6 +88,7 @@ podTemplate(label: 'microservices',
         stage('Build Docker image') {
             container('jnlp') {
                 sh "env"
+				GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                 sh "docker build -t test ."
 				sh "ls"
             }
