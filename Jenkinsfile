@@ -97,24 +97,17 @@ podTemplate(label: 'microservices',
         stage ('production') {
 			container('jnlp') {
                 def commit_idd = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                println commit_idd
 				if(commit_idd == 'master')
 				steps {
 					println "MASTER"
 				}
-			}
-		}
-
-        stage ('staging') {
-			container('jnlp') {
-                def commit_idd = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
 				if(commit_idd == 'staging')
 				steps {
 					println "STAGING"
 				}
 			}
 		}
-
-
 
 		// if staging branch: 
 		// tag version as staging
