@@ -96,13 +96,13 @@ podTemplate(label: 'microservices',
 		
         stage ('production') {
 			container('jnlp') {
-                def commit_idd = sh(returnStdout: true, script: 'git symbolic-ref -q --short HEAD').trim()
-                println commit_idd
-				if(commit_idd == 'master')
+                def commit_idad = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                println commit_idad
+				if(commit_idad == 'master')
 				steps {
 					println "MASTER"
 				}
-				if(commit_idd == 'staging')
+				if(commit_idad == 'staging')
 				steps {
 					println "STAGING"
 				}
