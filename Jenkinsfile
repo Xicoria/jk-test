@@ -96,19 +96,13 @@ podTemplate(label: 'microservices',
 		
         stage ('production') {
 			container('jnlp') {
-				sh 'printenv'
-                def commit_idad = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-                println commit_idad
-                def commit_idd = sh(returnStdout: true, script: 'git name-rev --name-only HEAD|cut -f3 -d/').trim()
-                println commit_idd
-				sh 'git rev-parse --abbrev-ref HEAD > GIT_BRANCH'
-				git_branch = readFile('GIT_BRANCH').trim()
-				println git_branch
-				if(commit_idad == 'master')
+                def commit_id = sh(returnStdout: true, script: 'git name-rev --name-only HEAD|cut -f3 -d/').trim()
+                println commit_id
+				if(commit_id == 'master')
 				steps {
 					println "MASTER"
 				}
-				if(commit_idad == 'staging')
+				if(commit_id == 'staging')
 				steps {
 					println "STAGING"
 				}
