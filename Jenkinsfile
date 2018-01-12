@@ -98,8 +98,8 @@ podTemplate(label: 'microservices',
 			container('jnlp') {
                 def commit_idad = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                 println commit_idad
-                def commit_idad = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-                println commit_idad
+                def commit_idd = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                println commit_idd
 				if(commit_idad == 'master')
 				steps {
 					println "MASTER"
