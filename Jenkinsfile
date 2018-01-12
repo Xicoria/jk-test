@@ -89,7 +89,7 @@ podTemplate(label: 'microservices',
 				def commit_id = readFile('.git/commit-id').trim()
 				println commit_id
 
-                sh "bash -c docker build -t test ."
+                sh "docker build -t test:${commit_id} ./"
 				sh "ls"
             }
         }
