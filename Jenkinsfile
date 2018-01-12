@@ -88,8 +88,6 @@ podTemplate(label: 'microservices',
 				sh "git rev-parse HEAD > .git/commit-id"
 				def commit_id = readFile('.git/commit-id').trim()
 				println commit_id
-
-				println git_branch
                 sh "docker build -t test:${commit_id} ./"
 				sh "ls"
             }
