@@ -4,7 +4,7 @@ podTemplate(label: 'microservices',
     containers: [
         containerTemplate(
             name: 'jnlp',
-            image: 'xicoria/jkslave:latest
+            image: 'xicoria/jkslave:latest'
         ),
         containerTemplate(
             name: 'php',
@@ -89,6 +89,7 @@ podTemplate(label: 'microservices',
             container('jnlp') {
                 sh "env"
 				GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+				sh "env"
                 sh "docker build -t test ."
 				sh "ls"
             }
