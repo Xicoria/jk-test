@@ -94,8 +94,9 @@ podTemplate(label: 'microservices',
             }
         }
         stage('using defined variable of other stage') {
-				
-			
+			container('jnlp') {
+				sh "kubectl get pods"
+			}		
 		}
 		// if staging branch: 
 		// tag version as staging
