@@ -50,11 +50,11 @@ podTemplate(label: 'microservices',
 		}
         stage('Setting up php modules') {
 			container('php') {
-				sh "yes | pecl install igbinary"
-				sh "yes | pecl install redis"
-				sh "echo 'extension=igbinary.so' > /usr/local/etc/php/conf.d/extra_php.ini"
-				sh "echo 'extension=redis.so' >> /usr/local/etc/php/conf.d/extra_php.ini"
-				sh "cat /usr/local/etc/php/conf.d/extra_php.ini"
+				sh "#yes | pecl install igbinary"
+				sh "#yes | pecl install redis"
+				sh "#echo 'extension=igbinary.so' > /usr/local/etc/php/conf.d/extra_php.ini"
+				sh "#echo 'extension=redis.so' >> /usr/local/etc/php/conf.d/extra_php.ini"
+				sh "#cat /usr/local/etc/php/conf.d/extra_php.ini"
 			}
 		}
         stage('Installing composer') {
@@ -71,16 +71,16 @@ podTemplate(label: 'microservices',
 				sh "export GIT_REVISION=\$(git rev-parse --short HEAD)"
                 dir('src') {
 					sh "ls"
-					sh "composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest"
-					sh "composer clear-cache"
-					sh "composer dump-autoload --classmap-authoritative"
+					sh "#composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest"
+					sh "#composer clear-cache"
+					sh "#composer dump-autoload --classmap-authoritative"
 				}
 			}
 		}
         stage('Running tests') {
             container('php') {
 				dir('src') {
-					sh "./vendor/bin/phpunit"
+					sh "# ./vendor/bin/phpunit"
 				}
             }
         }	
