@@ -96,6 +96,13 @@ podTemplate(label: 'microservices',
 		
         stage ('production') {
 			container('jnlp') {
+
+				def branch = ${BRANCH_NAME}
+				def commit = ${GIT_COMMIT}
+				println branch
+				println commit
+
+
                 def commit_idad = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                 println commit_idad
 				if(commit_idad == 'master')
@@ -122,4 +129,4 @@ podTemplate(label: 'microservices',
 
 
     }
-}
+returnStdout}
