@@ -96,7 +96,7 @@ podTemplate(label: 'microservices',
 		
         stage ('production') {
 			container('jnlp') {
-                def commit_idd = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+                def commit_idd = sh(returnStdout: true, script: 'git symbolic-ref -q --short HEAD').trim()
                 println commit_idd
 				if(commit_idd == 'master')
 				steps {
