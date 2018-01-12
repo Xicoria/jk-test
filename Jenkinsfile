@@ -86,7 +86,7 @@ podTemplate(label: 'microservices',
             container('jnlp') {
                 sh "env"
 				GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-				sh "EXPORT GIT_REF=`git rev-parse --abbrev-ref HEAD`"
+				sh "export GIT_REF=`git rev-parse --abbrev-ref HEAD`"
 				sh "env"
                 sh "docker build -t test ."
 				sh "ls"
