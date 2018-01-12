@@ -85,9 +85,10 @@ podTemplate(label: 'microservices',
         stage('Build Docker image') {
             container('jnlp') {
                 sh "env"
-				GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-				sh "export GIT_REF=`git rev-parse --abbrev-ref HEAD`"
-				sh "env"
+				sh "git rev-parse HEAD > .git/commit-id"
+				def commit_id = readFile('.git/commit-id').trim()
+				println commit_id
+
                 sh "bash -c docker build -t test:${git rev-parse --abbrev-ref HEAD} ."
 				sh "ls"
             }
