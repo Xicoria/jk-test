@@ -85,10 +85,12 @@ podTemplate(label: 'microservices',
         stage('Build Docker image') {
             container('jnlp') {
                 sh "env"
-				sh "git rev-parse HEAD > .git/commit-id"
-				def commit_id = readFile('.git/commit-id').trim()
-				println commit_id
+				//sh "git rev-parse HEAD > .git/commit-id"
+				//def commit_id = readFile('.git/commit-id').trim()
+                def git_branch = ${GIT_BRANCH}
+				//println commit_id
 
+				println git_branch
                 sh "docker build -t test:${commit_id} ./"
 				sh "ls"
             }
