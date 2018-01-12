@@ -96,9 +96,8 @@ podTemplate(label: 'microservices',
 		
         stage ('production') {
 			container('jnlp') {
-				when {
-					branch 'master'
-				}
+                def commit_idd = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+				if(commit_idd == 'master')
 				steps {
 					println "MASTER"
 				}
@@ -107,9 +106,8 @@ podTemplate(label: 'microservices',
 
         stage ('staging') {
 			container('jnlp') {
-				when {
-					branch 'staging'
-				}
+                def commit_idd = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+				if(commit_idd == 'staging')
 				steps {
 					println "STAGING"
 				}
