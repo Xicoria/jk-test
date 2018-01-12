@@ -87,14 +87,14 @@ podTemplate(label: 'microservices',
                 sh "env"
 				sh "git rev-parse HEAD > .git/commit-id"
 				def commit_id = readFile('.git/commit-id').trim()
-                def commit_idd = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+                def commit_idd = sh(returnStdout: true, script: 'git rev-parse HEAD').trim().take(7)
 				println commit_id
                 sh "docker build -t test:${commit_idd} ./"
 				sh "ls"
             }
         }
         stage('using defined variable of other stage') {
-				println commit_id
+				
 			
 		}
 		// if staging branch: 
