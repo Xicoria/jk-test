@@ -99,7 +99,7 @@ podTemplate(label: 'microservices',
 				sh 'printenv'
                 def commit_idad = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                 println commit_idad
-                def commit_idd = sh(returnStdout: true, script: 'git name-rev --name-only HEAD').trim()
+                def commit_idd = sh(returnStdout: true, script: 'git name-rev --name-only HEAD|cut -f3 -d\/').trim()
                 println commit_idd
 				sh 'git rev-parse --abbrev-ref HEAD > GIT_BRANCH'
 				git_branch = readFile('GIT_BRANCH').trim()
