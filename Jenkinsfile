@@ -84,13 +84,8 @@ podTemplate(label: 'microservices',
         }	
         stage('Build Docker image') {
             container('jnlp') {
-                sh "env"
-				sh "git rev-parse HEAD > .git/commit-id"
-				def commit_id = readFile('.git/commit-id').trim()
                 def commit_idd = sh(returnStdout: true, script: 'git rev-parse HEAD').trim().take(7)
-				println commit_id
                 sh "docker build -t test:${commit_idd} ./"
-				sh "ls"
             }
         }
         stage('using defined variable of other stage') {
@@ -98,6 +93,31 @@ podTemplate(label: 'microservices',
 				sh "kubectl get pods"
 			}		
 		}
+		
+        stage ('production') {
+			container('jnlp') {
+				when {
+					branch 'master'
+				}
+				steps {
+					println "MASTER"
+				}
+			}
+		}
+
+        stage ('staging') {
+			container('jnlp') {
+				when {
+					branch 'staging'
+				}
+				steps {
+					println "STAGING"
+				}
+			}
+		}
+
+
+
 		// if staging branch: 
 		// tag version as staging
         // update deploy to have 1 running instance
