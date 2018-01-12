@@ -94,7 +94,7 @@ podTemplate(label: 'microservices',
 				sh "ls"
             }
         }
-        stagep'using defined variable of other stage') {
+        stage('using defined variable of other stage') {
 				println commit_id
 			
 		}
