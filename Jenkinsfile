@@ -69,7 +69,6 @@ podTemplate(label: 'microservices',
 				checkout scm
                 sh "env"
                 dir('src') {
-					sh "ls"
 					sh "#composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest"
 					sh "#composer clear-cache"
 					sh "#composer dump-autoload --classmap-authoritative"
@@ -87,6 +86,7 @@ podTemplate(label: 'microservices',
             container('jnlp') {
                 sh "env"
 				GIT_BRANCH = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+				sh "EXPORT GIT_REF=`git rev-parse --abbrev-ref HEAD`"
 				sh "env"
                 sh "docker build -t test ."
 				sh "ls"
