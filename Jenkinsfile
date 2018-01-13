@@ -68,8 +68,7 @@ podTemplate(label: 'microservices',
 			container('php') {
 				checkout scm
                 sh "env"
-                dir('src') {
-					sh "#composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest"
+                dir('src') { sh "#composer install --prefer-dist --no-autoloader --no-scripts --no-progress --no-suggest"
 					sh "#composer clear-cache"
 					sh "#composer dump-autoload --classmap-authoritative"
 				}
@@ -98,12 +97,10 @@ podTemplate(label: 'microservices',
 			container('jnlp') {
                 def commit_id = sh(returnStdout: true, script: 'git name-rev --name-only HEAD|cut -f3 -d/').trim()
                 println commit_id
-				if(commit_id == 'master')
-				steps {
+				if(commit_id == 'master') {
 					println "MASTER"
 				}
-				if(commit_id == 'staging')
-				steps {
+				if(commit_id == 'staging') {
 					println "STAGING"
 				}
 			}
