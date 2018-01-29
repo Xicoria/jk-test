@@ -23,6 +23,8 @@ podTemplate(label: 'microservices',
         stage('Credentials') {
 			container('php') {
                 sh 'printenv'
+                def vari = credentials('ID_SECRET');
+				echo "${vari}"
 			}
 		}
     }
