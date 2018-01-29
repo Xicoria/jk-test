@@ -19,16 +19,15 @@ podTemplate(label: 'microservices',
     ],
     volumes: [hostPathVolume(hostPath: '/var/run/docker.sock', mountPath: '/var/run/docker.sock')]
 ) {
-      node ('microservices') {
-        stage('Credentials') {
-			container('php') {
-                sh 'printenv'
-                def vari = credentials('ID_SECRET')
-				echo "${vari}"
-                withCredentials([string(credentialsId: 'ID_SECRET', variable: 'ID_SECRET')]) {
-                sh 'printenv'
-              }
-			}
-		}
+  node ('microservices') {
+    stage('Credentials') {
+      withCredentials([string(credentialsId: 'ID_SECRET', variable: 'ID_SECRET')]) {
+	    container('php') {
+          sh 'printenv'
+          def vari = credentials('ID_SECRET')
+          echo "${vari}"
+        }
+      }
     }
+  }
 }
